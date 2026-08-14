@@ -150,3 +150,17 @@ Three things here were easy to get wrong, all since fixed:
 
 The d12 and d20 face lists are derived from their face normals rather than typed
 out by hand — the manual lists are long and easy to get subtly wrong.
+
+## Licence
+
+Two parts, see [LICENSE](LICENSE) and [LICENSE-MODELS](LICENSE-MODELS):
+
+- **Code** — `dice.scad`, `generate.py`, `mmu3mf.py`, `verify.py`, `build.sh` —
+  MIT. Use it, change it, ship it.
+- **The dice designs and any mesh generated from them** — CC BY 4.0. Free for
+  any purpose including selling prints, with credit.
+
+`legacy/Parametric-Easy-Print-D20.scad` is third-party: Copyright 2017
+HalfwitTomfoolery, CC BY 4.0 or later, redistributed unmodified with its notice
+intact. `dice.scad` is an independent implementation that shares no code with
+it, though it uses the same approach of hulling spheres at the vertices.
