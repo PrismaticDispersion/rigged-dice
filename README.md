@@ -9,8 +9,13 @@ generate.py    builds the labels, writes wrapper .scad files, renders output
 mmu3mf.py      packs body + numbers into one two-colour 3MF (standard library only)
 verify.py      checks everything under dice/ is watertight and correctly assembled
 dice/          output, one folder per die type + manifest.json
+makerworld/    single-file variant for MakerWorld's Parametric Model Maker
 legacy/        the original Parametric-Easy-Print-D20 and its renders
 ```
+
+Want to pick your own numbers instead of the six rigged variants? See
+[`makerworld/`](makerworld/) — one self-contained `.scad` with the side count
+and every face exposed as parameters.
 
 Each die in `dice/<type>/` comes as:
 
