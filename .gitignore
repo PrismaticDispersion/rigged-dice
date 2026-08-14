@@ -1,0 +1,10 @@
+# Generated meshes and renders. Everything here is rebuilt in seconds by
+# ./build.sh, and the STLs run to hundreds of megabytes, so they stay out of
+# the repo. The .scad wrappers and dice/manifest.json are kept: together they
+# are the exact record of what every die carries.
+*.stl
+*.3mf
+*.png
+
+__pycache__/
+*.pyc
