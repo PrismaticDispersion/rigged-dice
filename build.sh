@@ -3,8 +3,8 @@
 # Build the whole dice set and check it.
 #
 # Produces, for all 42 dice:
-#   dice/<type>/<name>.stl   single-colour print
-#   dice/<type>.<name>.3mf   two-colour AMS print (body + numbers)
+#   dice/<type>/<name>.stl   single-color print
+#   dice/<type>.<name>.3mf   two-color AMS print (body + numbers)
 #   dice/<type>/<name>.png   two-sided preview
 #
 # Usage:
@@ -40,11 +40,11 @@ echo "Using OpenSCAD: $OPENSCAD"
 "$OPENSCAD" --version 2>&1 | head -1
 
 echo
-echo "== single-colour STLs =="
+echo "== single-color STLs =="
 python3 generate.py "$@"
 
 echo
-echo "== two-colour 3MFs and previews =="
+echo "== two-color 3MFs and previews =="
 python3 generate.py --3mf --preview "$@"
 
 echo

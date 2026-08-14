@@ -42,7 +42,7 @@ OPENSCAD = Path(os.environ.get("OPENSCAD") or DEFAULT_OPENSCAD)
 
 DEFAULT_SEED = 20250521
 
-# Display colours baked into the 3MF so the parts are distinguishable on load.
+# Display colors baked into the 3MF so the parts are distinguishable on load.
 # They are only a preview: the actual print uses whatever filament sits in the
 # slot each part is assigned to (body = 1, numbers = 2).
 BODY_COLOR = "#28323CFF"
@@ -221,7 +221,7 @@ def main() -> int:
                     help="pack each die into one 3MF with the numbers assigned to "
                          "filament 2, ready to print on an AMS")
     ap.add_argument("--split", action="store_true",
-                    help="emit body+numbers part STLs for a two-colour AMS print "
+                    help="emit body+numbers part STLs for a two-color AMS print "
                          "instead of one combined STL")
     ap.add_argument("--preview", action="store_true",
                     help="also render a two-sided PNG next to each STL")

@@ -6,7 +6,7 @@ in a standard D&D set, 42 dice in all.
 ```
 dice.scad      parametric d4/d6/d8/d10/d12/d20 with arbitrary text per face
 generate.py    builds the labels, writes wrapper .scad files, renders output
-mmu3mf.py      packs body + numbers into one two-colour 3MF (standard library only)
+mmu3mf.py      packs body + numbers into one two-color 3MF (standard library only)
 verify.py      checks everything under dice/ is watertight and correctly assembled
 dice/          output, one folder per die type + manifest.json
 makerworld/    single-file variant for MakerWorld's Parametric Model Maker
@@ -22,15 +22,15 @@ Each die in `dice/<type>/` comes as:
 | File | What it is |
 |------|-----------|
 | `.3mf` | **for the AMS** — body and numbers as two parts of one object, numbers on filament 2 |
-| `.stl` | the same die as one solid, for a single-colour print |
+| `.stl` | the same die as one solid, for a single-color print |
 | `.png` | two-sided preview, so you can read the rigged faces without slicing |
 | `.scad` | the source, recording exactly which numbers this die carries |
 
 ## Building
 
 ```sh
-./generate.py                    # all 42 dice as single-colour STLs
-./generate.py --3mf              # one assembled 2-colour 3MF per die (AMS)
+./generate.py                    # all 42 dice as single-color STLs
+./generate.py --3mf              # one assembled 2-color 3MF per die (AMS)
 ./generate.py --split            # the same two parts as separate STLs
 ./generate.py --preview          # also write the two-sided PNGs
 ./generate.py --type d20 d10     # just those types
@@ -44,10 +44,10 @@ A full run takes a few seconds. Flags combine, and re-running is cheap, so the
 committed set was made with `./generate.py` followed by
 `./generate.py --3mf --preview`.
 
-## Two-colour printing on the AMS
+## Two-color printing on the AMS
 
 Open a `.3mf` and it arrives as **one object with two parts**: `body` on filament
-1 and `numbers` on filament 2. Assign your two colours to those slots and slice —
+1 and `numbers` on filament 2. Assign your two colors to those slots and slice —
 no aligning, no positioning, nothing to assemble.
 
 The numbers are recessed 0.9 mm into the faces and the number part fills those
@@ -64,10 +64,10 @@ to a filament slot.
 
 The first attempt used the PrusaSlicer convention instead — one merged mesh with
 triangle-range volumes in `Slic3r_PE_model.config` — which Bambu Studio silently
-ignores, importing the die as a single uncoloured part. If you ever see that
+ignores, importing the die as a single uncolored part. If you ever see that
 symptom again, that sidecar is the thing to check.
 
-For a single-colour print use the `.stl`, or just print the `.3mf` with both
+For a single-color print use the `.stl`, or just print the `.3mf` with both
 parts set to the same filament.
 
 ## The six variants

@@ -246,11 +246,11 @@ module engrave(label, where, n, up, size) {
 
 /*
 `part` selects what gets rendered, so one definition serves both the
-single-colour print and a two-material AMS print:
+single-color print and a two-material AMS print:
 
     "all"     the finished die, numbers recessed into it (default)
-    "body"    same thing - the half an AMS print does in the body colour
-    "numbers" just the plugs that fill those recesses, in the number colour
+    "body"    same thing - the half an AMS print does in the body color
+    "numbers" just the plugs that fill those recesses, in the number color
 
 "body" and "numbers" are exact complements in the same coordinate frame, so
 loading them as two parts of one object lines them up with no repositioning.

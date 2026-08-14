@@ -4,7 +4,7 @@ A 3MF is a zip of XML, so this needs nothing outside the standard library.
 
 Layout follows what Bambu Studio and OrcaSlicer write themselves, because they
 ignore the PrusaSlicer convention (one merged mesh plus triangle-range volumes
-in Slic3r_PE_model.config - that loads as a single uncoloured part):
+in Slic3r_PE_model.config - that loads as a single uncolored part):
 
   * each part is its own <object> holding a mesh
   * one further <object> joins them with <components>, and that is what the
