@@ -1,36 +1,47 @@
-This project is licensed in two parts:
+CC0 1.0 Universal - Public Domain Dedication
 
-  * The software - dice.scad, generate.py, mmu3mf.py, verify.py, build.sh and
-    the generated wrapper .scad files - is under the MIT License, below.
+To the extent possible under law, Nathaniel Westlake has waived all copyright
+and related or neighboring rights to the rigged dice generator: dice.scad,
+generate.py, mmu3mf.py, verify.py, build.sh, makerworld/, and the dice designs
+and any mesh generated from them (.stl, .3mf, .png).
 
-  * The dice designs themselves, and any mesh generated from them (.stl, .3mf,
-    .png), are under Creative Commons Attribution 4.0 International.
-    See LICENSE-MODELS.
+You may copy, modify, distribute and use the work, including for commercial
+purposes, all without asking permission and without any obligation to credit.
 
-  * legacy/Parametric-Easy-Print-D20.scad is third-party work under its own
-    licence, Creative Commons Attribution 4.0 International, Copyright 2017
-    HalfwitTomfoolery. Its notice must be kept intact. It is not covered by
-    the MIT License below.
+The full legal code is at:
+
+    https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+A human-readable summary is at:
+
+    https://creativecommons.org/publicdomain/zero/1.0/
+
+This file is the dedication notice in the form Creative Commons recommends for
+marking a work; the canonical text at the URL above governs.
+
+Credit is not required, but it is welcome:
+
+    https://github.com/PrismaticDispersion/rigged-dice
+
+The work is provided "as is", without warranty of any kind, express or implied.
 
 
-MIT License
+ONE EXCEPTION - third-party material
+------------------------------------------------------------------------------
+legacy/Parametric-Easy-Print-D20.scad is NOT covered by the dedication above.
+It is not mine to dedicate. It is:
 
-Copyright (c) 2026 Nathaniel Westlake
+    Parametric Easy-Print D20
+    Copyright 2017 HalfwitTomfoolery
+    https://www.youmagine.com/halfwittomfoolery/designs
+    Licensed Creative Commons Attribution 4.0 or later
+    https://creativecommons.org/licenses/by/4.0/
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+It is redistributed here unmodified, with its notice intact, and keeps its own
+terms: you may use it, but you must give attribution. It is kept only as a
+record of what this project grew out of, and nothing else here depends on it.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+dice.scad is an independent implementation that shares no code with that file,
+though it was written after reading it and uses the same general approach of
+hulling spheres placed at the vertices to round a polyhedron. dice.scad is
+covered by the CC0 dedication above.
