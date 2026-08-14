@@ -101,8 +101,17 @@ face_20 = "20";
 
 /* [Style] */
 
-// Font. Liberation Sans is always available; others may not render.
-font = "Liberation Sans:style=Bold"; // [Liberation Sans:style=Bold, Liberation Sans, Liberation Serif:style=Bold, Liberation Mono:style=Bold, DejaVu Sans:style=Bold]
+// Font. These three ship with OpenSCAD, so they render anywhere.
+font_family = "Liberation Sans"; // [Liberation Sans, Liberation Serif, Liberation Mono]
+
+// Font weight.
+font_style = "Bold"; // [Bold, Regular, Italic, Bold Italic]
+
+// Advanced: any other font installed on the renderer, given in full, such as
+// "DejaVu Sans:style=Bold". Leave empty to use the two settings above. A font
+// that is not installed falls back to another one silently, so check the
+// preview if you change this.
+font_custom = "";
 
 // Size of the numbers, as a multiple of the automatic fit.
 text_scale = 1.25; // [0.5:0.05:2.0]
@@ -129,6 +138,14 @@ d4_corner_offset = 0.48; // [0.2:0.01:0.7]
 d4_text_scale = 0.80; // [0.4:0.05:1.2]
 
 /* [Hidden] */
+
+// Assembled from the two dropdowns above. Kept out of the Customizer because a
+// full font spec contains a colon, and the Customizer reads a colon inside a
+// dropdown as the separator between a value and its display label - so
+// "Liberation Sans:style=Bold" as a dropdown entry would quietly set the font
+// to "Liberation Sans" and drop the weight.
+font = font_custom != "" ? font_custom
+                         : str(font_family, ":style=", font_style);
 
 // Faces past the selected side count are ignored.
 all_faces = [face_1, face_2, face_3, face_4, face_5, face_6, face_7, face_8, face_9, face_10, face_11, face_12, face_13, face_14, face_15, face_16, face_17, face_18, face_19, face_20];

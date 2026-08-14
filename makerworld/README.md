@@ -34,7 +34,8 @@ file.
 | | `part` | whole die, body only, or numbers only |
 | | `die_size` | largest dimension in mm, as you would measure it; 0 keeps the standard size |
 | Numbers | `face_1` … `face_20` | free text, one or two characters |
-| Style | `font`, `text_scale`, `text_depth`, `rounding`, `mark_6_and_9`, `smoothness` | |
+| Style | `font_family`, `font_style`, `font_custom` | three families x four weights |
+| | `text_scale`, `text_depth`, `rounding`, `mark_6_and_9`, `smoothness` | |
 | d4 corner numbers | `d4_corner_offset`, `d4_text_scale` | only affect the d4 |
 
 Faces past the selected side count are ignored, so `face_11`–`face_20` simply do
@@ -52,9 +53,18 @@ the *corners*, not the faces — each face carries the numbers of its three
 corners, so whichever corner points up reads the same on all three visible
 faces.
 
-**Font.** The default is Liberation Sans, which OpenSCAD ships with, so it
-renders anywhere. Arial and other system fonts are not guaranteed to exist on
-MakerWorld's renderer, and a missing font silently falls back to something else.
+**Font.** Chosen with two dropdowns, `font_family` (Liberation Sans, Serif or
+Mono) and `font_style` (Bold, Regular, Italic, Bold Italic). All twelve
+combinations are tested. Those three families ship with OpenSCAD, so they render
+anywhere; Arial and other system fonts are not guaranteed to exist on
+MakerWorld's renderer, and a missing font falls back silently. `font_custom`
+takes a full spec such as `DejaVu Sans:style=Bold` to override both.
+
+Family and weight are deliberately *separate* dropdowns rather than one list of
+full font specs. A full spec contains a colon, and the Customizer reads a colon
+inside a dropdown as the separator between a value and its display label — so a
+`Liberation Sans:style=Bold` entry would quietly set the font to
+`Liberation Sans` and drop the weight, rendering every die in Regular.
 
 **Two-colour prints.** Generate the model twice, once with `part = body` and
 once with `part = numbers`, then load both as parts of a single object in Bambu
