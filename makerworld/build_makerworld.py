@@ -65,8 +65,15 @@ https://github.com/PrismaticDispersion/rigged-dice
 // Number of sides
 sides = 20; // [4:d4, 6:d6, 8:d8, 10:d10, 12:d12, 20:d20]
 
-// Which part to build. Use body + numbers for a two-colour print.
-part = "all"; // [all:Whole die, body:Body only (colour 1), numbers:Numbers only (colour 2)]
+// Single colour, or the body and the numbers as two separate colours.
+colours = "dual"; // [single:Single colour, dual:Dual colour]
+
+// Colour of the die body. Preview only - you pick the real filament when you
+// print, this just decides which slot the part lands in.
+body_colour = "white"; // [white, black, red, orange, gold, green, blue, purple, silver]
+
+// Colour of the numbers.
+number_colour = "black"; // [black, white, red, orange, gold, green, blue, purple, silver]
 
 // Overall size in mm - the largest dimension, as you would measure it with
 // calipers. 0 keeps the standard size for this die.
@@ -143,19 +150,67 @@ function die_type(n) =
 type = die_type(sides);
 labels = [for (i = [0:sides - 1]) clip(all_faces[i])];
 
-// Largest dimension of the finished die, matching how die() scales it. Used so
-// that die_size means the size you would measure, rather than the
-// corner-to-corner figure the internal presets use - on a d6 those differ by a
-// factor of the cube diagonal, which is a surprising way to lose 40%.
+// --- sitting the die flat on the build plate --------------------------------
+// die() builds every solid centred on the origin in its own natural pose, which
+// leaves most of them balanced on a vertex. Printing wants a face on the plate,
+// so one face is rotated to point straight down and the die is dropped onto
+// z = 0. Any face will do: within a die type they are all congruent.
+
+// The face that ends up on the plate, and the rotation taking it onto -Z. The
+// cross product vanishes when that normal already lies along Z, so fall back to
+// any perpendicular axis - that case still needs the 180 turn when it points up.
+function down_normal(t) = face_normal(vertices(t), faces(t)[0]);
+function tip_axis(n) = let (a = cross(n, [0, 0, -1])) norm(a) < 1e-9 ? [1, 0, 0] : a;
+function tip_angle(n) = acos(max(-1, min(1, n * [0, 0, -1])));
+
+// Rodrigues rotation matrix, so the vertices can be measured in the pose they
+// will actually print in rather than the pose they were defined in.
+function rodrigues(k, a) =
+    let (u = unit(k), c = cos(a), s = sin(a), t = 1 - c,
+         x = u[0], y = u[1], z = u[2])
+    [[t*x*x + c,   t*x*y - s*z, t*x*z + s*y],
+     [t*x*y + s*z, t*y*y + c,   t*y*z - s*x],
+     [t*x*z - s*y, t*y*z + s*x, t*z*z + c]];
+
+// Vertices scaled the way die() scales them, then rotated face-down.
+function placed_vertices(t) =
+    let (n = down_normal(t),
+         r = rodrigues(tip_axis(n), tip_angle(n)),
+         sf = (size_mm(t) / 2 - rounding) / max([for (p = vertices(t)) norm(p)]))
+    [for (p = vertices(t)) r * (p * sf)];
+
+// How far to lift the die so its lowest surface rests on the plate. The body is
+// a hull of spheres, so the printed surface sits `rounding` below the lowest
+// vertex centre.
+function rest_height(t) = -min([for (p = placed_vertices(t)) p[2]]) + rounding;
+
+// Largest dimension of the finished die in its printing pose, so that die_size
+// means the size you would measure with calipers. Deliberately not the
+// corner-to-corner figure the internal presets use - on a d6 those differ by
+// the cube diagonal, a surprising way to lose 40%. The hull of spheres extends
+// the bounding box by the sphere radius on each side.
 function widest_mm(t) =
-    let (v = vertices(t),
-         sf = (size_mm(t) / 2 - rounding) / max([for (p = v) norm(p)]))
-    2 * (max([for (p = v) max(abs(p[0]), abs(p[1]), abs(p[2]))]) * sf + rounding);
+    let (v = placed_vertices(t))
+    max(max([for (p = v) p[0]]) - min([for (p = v) p[0]]),
+        max([for (p = v) p[1]]) - min([for (p = v) p[1]]),
+        max([for (p = v) p[2]]) - min([for (p = v) p[2]])) + 2 * rounding;
 
 // die() sizes from the per-type preset, so an explicit size is applied as a
 // uniform scale. Everything scales with it, rounding and lettering included.
 scale(die_size > 0 ? die_size / widest_mm(type) : 1)
-    die(type, labels, part = part);
+translate([0, 0, rest_height(type)])
+rotate(a = tip_angle(down_normal(type)), v = tip_axis(down_normal(type))) {
+    if (colours == "dual") {
+        // Body and numbers are exact complements, so together they are the
+        // whole die - no overlap to fight over, no gap to leak through. Two
+        // colour() calls is all a dual-colour model needs; the slicer maps
+        // each to a filament.
+        color(body_colour)   die(type, labels, part = "body");
+        color(number_colour) die(type, labels, part = "numbers");
+    } else {
+        die(type, labels, part = "all");
+    }
+}
 
 '''
 

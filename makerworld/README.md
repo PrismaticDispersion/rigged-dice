@@ -31,7 +31,8 @@ file.
 | Group | Parameter | Notes |
 |---|---|---|
 | Die | `sides` | 4, 6, 8, 10, 12 or 20, as a dropdown |
-| | `part` | whole die, body only, or numbers only |
+| | `colours` | single colour, or dual colour |
+| | `body_colour`, `number_colour` | which slot each part lands in |
 | | `die_size` | largest dimension in mm, as you would measure it; 0 keeps the standard size |
 | Numbers | `face_1` … `face_20` | free text, one or two characters |
 | Style | `font_family`, `font_style`, `font_custom` | three families x four weights |
@@ -66,13 +67,23 @@ inside a dropdown as the separator between a value and its display label — so 
 `Liberation Sans:style=Bold` entry would quietly set the font to
 `Liberation Sans` and drop the weight, rendering every die in Regular.
 
-**Two-colour prints.** Generate the model twice, once with `part = body` and
-once with `part = numbers`, then load both as parts of a single object in Bambu
-Studio. They are exact complements in the same coordinate frame, so they need no
-aligning — the number plugs fill the recesses flush.
+**Two-colour prints.** Set `colours` to dual and the model comes out as two
+coloured bodies in one file — no generating it twice and reassembling. The die
+body and the numbers are exact complements in the same coordinate frame, so the
+number plugs fill the recesses flush, with no gap and no overlap. Verified for
+every side count: the two together come to exactly the volume of the solid die.
 
-The `numbers` part reports a non-zero genus, which is correct rather than a
-fault: the counters in `6`, `8` and `0` are real holes through those plugs.
+`body_colour` and `number_colour` decide which filament slot each part lands in.
+They are a preview — the real colour is whatever filament you load.
+
+On single colour the numbers are simply left as recesses, so the die reads by
+shadow. That means the single and dual models differ in volume by exactly the
+volume of the numbers, which is correct rather than a discrepancy.
+
+**Flat on the build plate.** Every die is rotated so one face lies on the plate
+and dropped to z = 0, which is the orientation you want to print in anyway.
+`die_size` is measured in that final pose, so it matches what you would put
+calipers across.
 
 ## Not yet verified on MakerWorld
 
