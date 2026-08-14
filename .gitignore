@@ -8,3 +8,6 @@
 
 __pycache__/
 *.pyc
+
+# Local session log, not for publication.
+chat_hist.md

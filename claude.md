@@ -1,13 +1,15 @@
 # Custom dice using openscad
 
+`claude --resume b565ee3b-8810-4f10-a3b9-f5c8e7276384`
+
 need custom randomized dice for my campaign
-6xd6
-6xd4
-6xd8
-6xd10 0-9
-6xd10 times 10 (for percentile dice) 00-90
-6xd12
-6xd20
+- 6xd6
+- 6xd4
+- 6xd8
+- 6xd10 0-9
+- 6xd10 times 10 (for percentile dice) 00-90
+- 6xd12
+- 6xd20
 
 I would like the following dice to be made for each set:
 
@@ -26,3 +28,6 @@ steps:
 3. put each type of dice in their own folder with correspondingly named stls
 
 openscad exe: ~/3DObjects/OpenSCAD.AppImage
+
+later additions:
+- dual-color for bambu ams
